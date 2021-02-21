@@ -20,6 +20,21 @@ tput setaf 2; echo "Done"
 tput setaf 9;
 sleep 1
 
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
+User=steam
+Group=steam
+ExecStartPre=/home/steam/steamcmd +login anonymous +force_install_dir /home/steam/valheimserver +app_update 896660 validate +exit
+ExecStart=/home/steam/valheimserver/start_valheim.sh
+ExecReload=/bin/kill -s HUP $MAINPID
+KillSignal=SIGINT
+WorkingDirectory=/home/steam/valheimserver
+LimitNOFILE=100000
+
 #add multiverse repo
 tput setaf 2; echo "Adding multiverse REPO"
 add-apt-repository -y multiverse
