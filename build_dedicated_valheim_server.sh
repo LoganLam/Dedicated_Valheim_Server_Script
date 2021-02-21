@@ -35,6 +35,13 @@ KillSignal=SIGINT
 WorkingDirectory=/home/steam/valheimserver
 LimitNOFILE=100000
 
+#chown steam user permissions to all of user steam dir location
+tput setaf 1; echo "Setting steam account permissions to /home/steam/*"
+chown -Rf steam:steam /home/steam/*
+tput setaf 2; echo "Done"
+tput setaf 9;
+sleep 1
+
 #add multiverse repo
 tput setaf 2; echo "Adding multiverse REPO"
 add-apt-repository -y multiverse
